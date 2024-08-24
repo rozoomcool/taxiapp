@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:taxiapp/screen/home_screen.dart';
+import 'package:taxiapp/screen/order_screen.dart';
 import 'package:taxiapp/screen/profile_screen.dart';
 import 'package:taxiapp/screen/root_screen.dart';
 
@@ -21,10 +22,12 @@ class AppRouter extends RootStackRouter {
         RedirectRoute(path: '', redirectTo: 'home'),
         AutoRoute(path: 'home', page: HomeRoute.page),
         AutoRoute(path: 'profile', page: ProfileRoute.page),
+        AutoRoute(path: 'order', page: OrderRoute.page)
         // AutoRoute(path: 'dash', page: DashRoute.page),
         // AutoRoute(path: 'settings', page: SettingsRoute.page),
       ],
     ),
+    // AutoRoute(page: HomeRoute.page, path: "/")
   ];
 
 }

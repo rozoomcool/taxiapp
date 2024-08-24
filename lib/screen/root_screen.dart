@@ -6,70 +6,53 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../router/app_router.dart';
 
 @RoutePage()
-class RootScreen extends StatelessWidget {
+class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
+
+  @override
+  State<RootScreen> createState() => _RootScreenState();
+}
+
+class _RootScreenState extends State<RootScreen> {
+  int selectedRoute = 0;
+
+  void changeRoute(int value) {
+    setState(() {
+      selectedRoute = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [
-        HomeRoute(),
-        ProfileRoute(),
-        // DashRoute(),
-        // SettingsRoute(),
-      ],
-      // appBarBuilder: (context, tabsRouter) {
-      //   return AppBar(
-      //     title: const Text("Rosul Taxist"),
-      //     centerTitle: true,
-      //     backgroundColor: Colors.transparent,
-      //     leading: IconButton(
-      //       onPressed: () {},
-      //       icon: Icon(Iconsax.menu_copy),
-      //     ),
-      //     actions: [
-      //       IconButton(
-      //         onPressed: () {
-      //           // context.read<AuthCubit>().logOut();
-      //         },
-      //         icon: const Icon(Iconsax.logout),
-      //       ),
-      //       // ...?actions[tabsRouter.current.name]?.map((e) => e)
-      //     ],
-      //   );
-      // },
+      routes: const [HomeRoute(), OrderRoute(), ProfileRoute()],
+      // body: const AutoRouter(),
+      lazyLoad: true,
       transitionBuilder: (context, child, animation) =>
-          TransitionsBuilders.slideLeftWithFade(
-              context, animation, animation, child),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {
-      //     context.pushRoute(const MapsRoute());
-      //   },
-      //   label: const FaIcon(FontAwesomeIcons.locationDot),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBuilder: (context, tabsRouter) {
-        return NavigationBar(
-          elevation: 4,
-          selectedIndex: tabsRouter.activeIndex,
-          onDestinationSelected: tabsRouter.setActiveIndex,
-          indicatorColor: Colors.transparent,
-          surfaceTintColor: Colors.black26,
-          indicatorShape: InputBorder.none,
-          backgroundColor: const Color(0xFF2C2B2B),
-          destinations: const [
-            NavigationDestination(
-                label: 'Главная', icon: Icon(Iconsax.home)),
-            NavigationDestination(
-                label: 'Профиль',
-                icon: Icon(Iconsax.user)),
-            // BottomNavigationBarItem(
-            //     label: 'Задачи', icon: Icon(Iconsax.task_square)),
-            // BottomNavigationBarItem(
-            //     label: 'Профиль', icon: Icon(Iconsax.user)),
-          ],
-        );
-      },
+          TransitionsBuilders.slideLeft(context, animation, animation, child),
+      bottomNavigationBuilder: (context, tabsRouter) => BottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Iconsax.home_1,
+                  size: 32,
+                ),
+                label: "Главная"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Iconsax.routing,
+                  size: 32,
+                ),
+                label: "Заказы"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Iconsax.user,
+                  size: 32,
+                ),
+                label: "Профиль"),
+          ]),
     );
   }
 }
