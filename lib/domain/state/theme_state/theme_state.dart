@@ -6,6 +6,7 @@ abstract class ThemeState extends Equatable {
   abstract final Color background;
   abstract final Color cardBorder;
   abstract final Color card;
+  abstract final Color grey;
 }
 
 @immutable
@@ -22,6 +23,9 @@ class DarkThemeState extends ThemeState {
 
   @override
   final Color card = const Color(0xFF2C2B2B);
+
+  @override
+  final Color grey = const Color(0xFFC8C8C8);
 
 
   @override
@@ -45,6 +49,9 @@ class LightThemeState extends ThemeState {
 
   @override
   final Color card = const Color(0xFFFCFCFC);
+
+  @override
+  final Color grey = const Color(0xFFC8C8C8);
 
 
   @override
